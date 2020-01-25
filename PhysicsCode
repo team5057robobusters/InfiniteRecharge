@@ -1,0 +1,69 @@
+//this file includes the calculations for determing the best angle
+
+
+import java.util.*;
+
+public class Main
+{
+	double knownD = 0; //unknown value that the sensor will return every 20 miliseconds (we need it to be in meters)
+	double actualTheta = 65; //default value
+	DistanceObjects[] vals = new DistanceObjects[55]; // 10-65 degrees
+	
+	// initializa the array with angles from 10 to 65 degrees
+	for (int i = 0; i < vals.length; i++)
+	{
+	    double temp = i + 10;
+	    vals[i] = new DistanceObjects(temp);
+	}
+	
+	//checks to find the correct angle
+	for (int i = 0; i < vals.length; i++)
+	{
+	    double theta = vals[i].getTheta();
+	    double distance = vals[i].getDistance();
+	    if (distance > knownD)
+	    {
+	        actualTheta = theta;
+	        break;
+	    }
+	}
+	//actualTheta will contain the angle at which we will shoot the ball
+}
+
+// class that holds the values for each theta and distance tested
+public class DistanceObjects 
+{
+    private double theta;
+    private double distance;
+    private double h;
+    
+    //constants
+    private final double v = 0; //unknown exiting volicity of the ball from the barrel
+    private final double hi = 0; //unknown height from the floor to the pivet point of the barrel
+    private final double z = 0; //unknown length of the barrel from the pivet point to the end of the barrel
+    
+    public distanceObjects(double initTheta)
+    {
+        theta = initTheta;
+        distance = findDistance(theta);
+        h = (2.49) - (z)(Math.sin(theta)) - hi
+    }
+    
+    public double findDistance(double t);
+    {
+        double d = 0;
+        d = v * Math.cos(t);
+        d = (d) / ( ( (-1)(v)(Math.sin(t)) + Math.sqrt( (Math.pow( ((v)(Math.sin(t))) , 2)) + (4)(4.905)(-h)) ) / -9.81 );
+        return d;
+    }
+    
+    public double getTheta()
+    {
+        return theta;
+    }
+    
+    public double getDistance()
+    {
+        return distance;
+    }
+}
