@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
           , rearLeftMotorPwmPort
           , rearRightMotorPwmPort
           , xboxPort
-          , throttlevalue)
+          , throttlevalue);
   }
 
   /**
