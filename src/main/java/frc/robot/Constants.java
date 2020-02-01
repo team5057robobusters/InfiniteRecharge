@@ -16,15 +16,19 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
-  //ports
-  final int frontLeftMotorPwmPort = 4;
-  final int frontRightMotorPwmPort = 5;
-  final int rearLeftMotorPwmPort = 3;
-  final int rearRightMotorPwmPort = 2;
+  public static final class DriveConstants{
+      public static final int frontLeftMotorPwmPort = 4;
+      public static final int frontRightMotorPwmPort = 5;
+      public static final int rearLeftMotorPwmPort = 3;
+      public static final int rearRightMotorPwmPort = 2;
 
-  final int xboxPort = 0;
+      public static final double throttlevalue = 0.5;//[0 - 1]
+  }
+  //ports
+
+
+  public static final int xboxPort = 0;
 
   //Consts
-  final double throttlevalue = 0.5;//[0 - 1]
+
 }
