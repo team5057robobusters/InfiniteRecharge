@@ -41,15 +41,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    //Default Commands that will Always Run
-    m_MDriveClass.setDefaultCommand(
-      //Going to run set function
-      new RunCommand(() -> 
-          m_MDriveClass.Drive(m_driverController.getY(Hand.kLeft)
-          ,m_driverController.getX(Hand.kLeft)
-          ,m_driverController.getX(Hand.kRight)))
-    );
-
     m_chooser.addOption("Simple Auto", m_SimpleAuto);
 
     Shuffleboard.getTab("Autonomous").add(m_chooser);
@@ -73,5 +64,12 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_chooser.getSelected();
+  }
+
+  public Command getTeleopCommand() {
+      return new RunCommand(() -> 
+      m_MDriveClass.Drive(m_driverController.getY(Hand.kLeft)
+      ,m_driverController.getX(Hand.kLeft)
+      ,m_driverController.getX(Hand.kRight)));
   }
 }
