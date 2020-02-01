@@ -26,7 +26,7 @@ public class MecanumDriveClass extends SubsystemBase {
     {
         DriveController.driveCartesian(
             ySpeed*Constants.DriveConstants.throttlevalue
-            ,xSpeed*Constants.DriveConstants.throttlevalue
+            ,-xSpeed*Constants.DriveConstants.throttlevalue
             ,zRotation);
     }
 
