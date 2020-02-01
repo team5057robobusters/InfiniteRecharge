@@ -10,10 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.drive.*;
+import frc.robot.utilities.MecanumDriveClass;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,25 +24,18 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   //ports
-  final int leftFrontPwmPort = 4;
-  final int rightFrontPwmPort = 5;
-  final int leftRearPwmPort = 3;
-  final int rightRearPwmPort = 2;
+  final int frontLeftMotorPwmPort = 4;
+  final int frontRightMotorPwmPort = 5;
+  final int rearLeftMotorPwmPort = 3;
+  final int rearRightMotorPwmPort = 2;
 
   final int xboxPort = 0;
 
   //Consts
   final double throttlevalue = 0.5;//[0 - 1]
 
-  //Define Drive Motors
-  VictorSP LeftFrontMotor;
-  VictorSP RightFrontMotor;
-  VictorSP LeftRearMotor;
-  VictorSP RightRearMotor;
-
-  MecanumDrive DriveController;
-
-  XboxController xboxControl;
+  //Define Clases
+  MecanumDriveClass driveClass;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -56,16 +46,13 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    LeftFrontMotor = new VictorSP(leftFrontPwmPort);
-    RightFrontMotor = new VictorSP(rightFrontPwmPort);
-    LeftRearMotor = new VictorSP(leftRearPwmPort);
-    RightRearMotor = new VictorSP(rightRearPwmPort);
-
-    RightFrontMotor.setInverted(true);
-    LeftRearMotor.setInverted(true);
-
-    DriveController = new MecanumDrive(LeftFrontMotor, LeftRearMotor, RightFrontMotor, RightRearMotor);
-    xboxControl = new XboxController(xboxPort);
+    driveClass = new MecanumDriveClass(
+          frontLeftMotorPwmPort
+          , frontRightMotorPwmPort
+          , rearLeftMotorPwmPort
+          , rearRightMotorPwmPort
+          , xboxPort
+          , throttlevalue)
   }
 
   /**
@@ -131,7 +118,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    DriveController.driveCartesian(xboxControl.getY(Hand.kLeft)*throttlevalue, -xboxControl.getX(Hand.kLeft)*throttlevalue, -xboxControl.getX(Hand.kRight));
+    driveClass.Drive();
   }
 
   @Override
@@ -145,5 +132,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    driveClass.TestForward();
   }
 }
