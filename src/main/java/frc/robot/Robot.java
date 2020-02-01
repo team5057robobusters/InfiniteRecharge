@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.MecanumDriveClass;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -23,20 +24,10 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  //ports
-  final int frontLeftMotorPwmPort = 4;
-  final int frontRightMotorPwmPort = 5;
-  final int rearLeftMotorPwmPort = 3;
-  final int rearRightMotorPwmPort = 2;
-
-  final int xboxPort = 0;
-
-  //Consts
-  final double throttlevalue = 0.5;//[0 - 1]
-
   //Define Clases
   MecanumDriveClass driveClass;
 
+  Constants constants;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -47,12 +38,12 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     driveClass = new MecanumDriveClass(
-          frontLeftMotorPwmPort
-          , frontRightMotorPwmPort
-          , rearLeftMotorPwmPort
-          , rearRightMotorPwmPort
-          , xboxPort
-          , throttlevalue);
+          constants.frontLeftMotorPwmPort
+          , constants.frontRightMotorPwmPort
+          , constants.rearLeftMotorPwmPort
+          , constants.rearRightMotorPwmPort
+          , constants.xboxPort
+          , constants.throttlevalue);
   }
 
   /**
