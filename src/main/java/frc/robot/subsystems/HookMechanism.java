@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
+import frc.robot.Constants;
 public class HookMechanism {
     /**
      * Creates a new HookMechanism.
@@ -14,8 +14,8 @@ public class HookMechanism {
     public XboxController xbox;
     public boolean hook;
     public HookMechanism() {
-      xbox = new XboxController(1234);
-      piston = new DoubleSolenoid(1, 1);
+      xbox = new XboxController(Constants.HookMechanismConstants.xboxPort);
+      piston = new DoubleSolenoid(Constants.HookMechanismConstants.pistonForwardChannel, Constants.HookMechanismConstants.pistonReverseChannel);
       hook = true;
     }
   
