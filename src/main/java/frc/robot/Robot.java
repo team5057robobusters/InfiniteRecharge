@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -18,8 +19,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
-import com.ctre.*;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,15 +39,19 @@ public class Robot extends TimedRobot {
 
   private UltrasonicSensor m_ultrasonic;
   private RobotContainer m_robotContainer;
+  private Intake m_intake;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   private Vision m_pixy2;
   private HookMechanism m_hook;
+  private Victor shootingMotor;
   //ports
   final int leftFrontCanPort = 4;
   final int rightFrontCanPort = 5;
   final int leftRearCanPort = 3;
   final int rightRearCanPort = 2;
+
+  private boolean isOn = false;
 
   final int xboxPort = 0;
 
@@ -80,7 +84,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-
+    shootingMotor = new Victor(1);
     LeftFrontMotor = new WPI_TalonSRX(leftFrontCanPort);
     RightFrontMotor = new WPI_TalonSRX(rightFrontCanPort);
     LeftRearMotor = new WPI_TalonSRX(leftRearCanPort);
@@ -89,6 +93,7 @@ public class Robot extends TimedRobot {
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
     m_ultrasonic = new UltrasonicSensor(0);
+    m_intake = new Intake(2, 3, 5, 6);
     m_pixy2 = new Vision();
     m_hook = new HookMechanism();
     RightFrontMotor.setInverted(true);
@@ -133,6 +138,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("IR", IR);
+    SmartDashboard.putString("color", detectedColor.toString()); 
 
     int proximity = m_colorSensor.getProximity();
 
@@ -197,7 +203,19 @@ public class Robot extends TimedRobot {
       }
       
     }
-    m_hook.checkButton();
+    if (xboxControl.getYButtonPressed()) {
+      if (isOn) {
+        m_intake.turnOff();
+        isOn = false;
+      }
+      else {
+        m_intake.turnOn(false);
+        isOn = true;
+      }
+    }
+    shootingMotor.set(xboxControl.getTriggerAxis(Hand.kRight));
+
+    m_hook.checkButton(xboxControl);
   }
 
   @Override

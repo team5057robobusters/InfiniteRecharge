@@ -11,15 +11,13 @@ public class HookMechanism {
      * Creates a new HookMechanism.
      */
     private DoubleSolenoid piston;
-    public XboxController xbox;
     public boolean hook;
     public HookMechanism() {
-      xbox = new XboxController(1234);
       piston = new DoubleSolenoid(1, 1);
       hook = true;
     }
   
-    public void checkButton() {
+    public void checkButton(XboxController xbox) {
       //Original code for the hook mechanism with two buttons
       /*if (xbox.getAButtonPressed() == true) {
         piston.set(Value.kForward);
@@ -29,7 +27,7 @@ public class HookMechanism {
       }
       */
       //Newer code for the hook mechanism where one button controls both the up and the down
-      if (xbox.getAButtonPressed() == true) {
+      if (xbox.getBButtonPressed() == true) {
         if (hook == true) {
           piston.set(Value.kForward);
           hook = false;
