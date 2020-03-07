@@ -5,23 +5,22 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
+import frc.robot.Constants;
 public class Intake extends SubsystemBase {
   /**
    * Creates a new HookMechanism.
    */
   private DoubleSolenoid piston;
   public XboxController xbox;
-  public final int forwardChannel, reverseChannel;
+  
   public Victor intakeMotor;
   public boolean isOn;
-  public Intake(int fc, int rc, int v) {
+  public Intake() {
     isOn = false;
-    forwardChannel = fc;
-    reverseChannel = rc;
-    xbox = new XboxController(0);
-    piston = new DoubleSolenoid(forwardChannel, reverseChannel);
-    intakeMotor = new Victor(v);
+    
+    xbox = new XboxController(IntakeConstants.xboxPort);
+    piston = new DoubleSolenoid(IntakeConstants.forwardChannel, IntakeConstants.reverseChannel);
+    intakeMotor = new Victor(IntakeConstants.victorPort);
   }
 
   @Override
