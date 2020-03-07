@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import com.ctre.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -54,16 +55,17 @@ public class Robot extends TimedRobot {
   final double throttlevalue = 1;//[0 - 1]
 
   //Define Drive Motors
-  TalonSRX LeftFrontMotor;
-  TalonSRX RightFrontMotor;
-  TalonSRX LeftRearMotor;
-  TalonSRX RightRearMotor;
+  WPI_TalonSRX LeftFrontMotor;
+  WPI_TalonSRX RightFrontMotor;
+  WPI_TalonSRX LeftRearMotor;
+  WPI_TalonSRX RightRearMotor;
 
-  //Define SpeedController Groups
-  SpeedControllerGroup LeftFrontDrive;
+  //Define FRCSpeedController Groups
+  /*SpeedControllerGroup LeftFrontDrive;
   SpeedControllerGroup RightFrontDrive;
   SpeedControllerGroup LeftRearDrive;
   SpeedControllerGroup RightRearDrive;
+  */
 
   MecanumDrive DriveController;
 
@@ -79,10 +81,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    LeftFrontMotor = new TalonSRX(leftFrontCanPort);
-    RightFrontMotor = new TalonSRX(rightFrontCanPort);
-    LeftRearMotor = new TalonSRX(leftRearCanPort);
-    RightRearMotor = new TalonSRX(rightRearCanPort);
+    LeftFrontMotor = new WPI_TalonSRX(leftFrontCanPort);
+    RightFrontMotor = new WPI_TalonSRX(rightFrontCanPort);
+    LeftRearMotor = new WPI_TalonSRX(leftRearCanPort);
+    RightRearMotor = new WPI_TalonSRX(rightRearCanPort);
 
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
@@ -93,7 +95,7 @@ public class Robot extends TimedRobot {
     LeftRearMotor.setInverted(true);
 
 
-    //DriveController = new MecanumDrive(LeftFrontMotor, LeftRearMotor, RightFrontMotor, RightRearMotor);
+    DriveController = new MecanumDrive(LeftFrontMotor, LeftRearMotor, RightFrontMotor, RightRearMotor);
     xboxControl = new XboxController(xboxPort);
     
   }
