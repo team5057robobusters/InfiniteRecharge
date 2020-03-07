@@ -14,8 +14,8 @@ public class HookMechanism {
     public XboxController xbox;
     public boolean hook;
     public HookMechanism() {
-      xbox = new XboxController(1234);
-      piston = new DoubleSolenoid(1, 1);
+      xbox = new XboxController(HookMechanismConstants.xboxPort);
+      piston = new DoubleSolenoid(HookMechanismConstants.pistonForewordChanel, HookMechanismConstants.pistonReverseChanel);
       hook = true;
     }
   
