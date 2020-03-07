@@ -15,6 +15,7 @@ public class IntakeDrop {
 
     public IntakeDrop()
     {
-        intakeLift = new DoubleSolenoid(IntakeDropConstants.intakeLiftPortForwardChannel,IntakeDropConstants.intakeLiftPortReverseChannel);
+        intakeLift = new DoubleSolenoid(Constants.IntakeDropConstants.intakeLiftPortForwardChannel,
+                        Constants.IntakeDropConstants.intakeLiftPortReverseChannel);
     }
 }
