@@ -18,7 +18,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
     isOn = false;
     
-    xbox = new XboxController(Constants.IntakeConstants.xboxPort);
+    xbox = new XboxController(Constants.xboxPort);
     piston = new DoubleSolenoid(Constants.IntakeConstants.forwardChannel, Constants.IntakeConstants.reverseChannel);
     intakeMotor = new Victor(Constants.IntakeConstants.victorPort);
   }

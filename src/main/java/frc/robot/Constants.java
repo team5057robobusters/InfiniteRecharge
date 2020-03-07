@@ -36,14 +36,12 @@ public final class Constants {
 	}
   
   public final class HookMechanismConstants{
-    public static final int xboxPort = 12345;
     public static final int pistonForwardChannel = 1;
     public static final int pistonReverseChannel = 1;
   }
   public final class IntakeConstants{
     public static final int forwardChannel =1;
     public static final int reverseChannel = 2;
-    public static final int xboxPort = 0;
     public static final int victorPort = 78;
     
     
