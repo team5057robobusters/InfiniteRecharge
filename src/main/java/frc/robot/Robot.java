@@ -40,33 +40,9 @@ public class Robot extends TimedRobot {
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   private Vision m_pixy2;
   private HookMechanism m_hook;
-  //ports
-  final int leftFrontCanPort = 4;
-  final int rightFrontCanPort = 5;
-  final int leftRearCanPort = 3;
-  final int rightRearCanPort = 2;
-
-  final int xboxPort = 0;
 
   //Consts
   final double throttlevalue = 1;//[0 - 1]
-
-  //Define Drive Motors
-  WPI_TalonSRX LeftFrontMotor;
-  WPI_TalonSRX RightFrontMotor;
-  WPI_TalonSRX LeftRearMotor;
-  WPI_TalonSRX RightRearMotor;
-
-  //Define FRCSpeedController Groups
-  /*SpeedControllerGroup LeftFrontDrive;
-  SpeedControllerGroup RightFrontDrive;
-  SpeedControllerGroup LeftRearDrive;
-  SpeedControllerGroup RightRearDrive;
-  */
-
-  MecanumDrive DriveController;
-
-  XboxController xboxControl;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -78,14 +54,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    LeftFrontMotor = new WPI_TalonSRX(leftFrontCanPort);
-    RightFrontMotor = new WPI_TalonSRX(rightFrontCanPort);
-    LeftRearMotor = new WPI_TalonSRX(leftRearCanPort);
-    RightRearMotor = new WPI_TalonSRX(rightRearCanPort);
-
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
-    m_ultrasonic = new UltrasonicSensor(0);
+    m_ultrasonic = new UltrasonicSensor();
     m_pixy2 = new Vision();
     m_hook = new HookMechanism();
 
@@ -184,15 +155,6 @@ public class Robot extends TimedRobot {
     if(m_teleopCommand != null)
     {
       m_teleopCommand.execute();
-    }
-    if(xboxControl.getAButton()){
-      if(m_pixy2.x1<150){
-        DriveController.driveCartesian(0, 0, .5);
-      }
-      if(m_pixy2.x1>170){
-        DriveController.driveCartesian(0, 0, -.5);
-      }
-      
     }
     m_hook.checkButton();
   }

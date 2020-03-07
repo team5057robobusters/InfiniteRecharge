@@ -1,16 +1,17 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class MecanumDriveClass extends SubsystemBase {
 
-    private final VictorSP FrontLeftMotor = new VictorSP(Constants.DriveConstants.frontLeftMotorPwmPort);
-    private final VictorSP FrontRightMotor = new VictorSP(Constants.DriveConstants.frontRightMotorPwmPort);
-    private final VictorSP RearLeftMotor = new VictorSP(Constants.DriveConstants.rearLeftMotorPwmPort);
-    private final VictorSP RearRightMotor = new VictorSP(Constants.DriveConstants.rearRightMotorPwmPort);
+    private final WPI_TalonSRX FrontLeftMotor = new WPI_TalonSRX(Constants.DriveConstants.frontLeftCanTalonSrxMotorPort);
+    private final WPI_TalonSRX FrontRightMotor = new WPI_TalonSRX(Constants.DriveConstants.frontRightCanTalonSrxMotorPort);
+    private final WPI_TalonSRX RearLeftMotor = new WPI_TalonSRX(Constants.DriveConstants.rearLeftCanTalonSrxMotorPort);
+    private final WPI_TalonSRX RearRightMotor = new WPI_TalonSRX(Constants.DriveConstants.rearRightCanTalonSrxMotorPort);
 
     private MecanumDrive DriveController;
 

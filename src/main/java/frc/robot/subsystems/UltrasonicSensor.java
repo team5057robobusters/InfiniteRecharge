@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Relay;
+import frc.robot.Constants;
 
 /**
  *
@@ -15,21 +16,20 @@ public class UltrasonicSensor {
     private final AnalogInput rangefinder;
     
     // The scaling factor:  distance in centimeters = volts returned / SCALING_FACTOR
-    private final int SCALING_FACTOR = 512/5*24/23;
     
     /** Creates a new ultrasonic sensor hooked up to <code>portNumber</code> on the analog breakout.
      * @params portNumber The port number on the breakout.
      */
-    public UltrasonicSensor(int portNumber){
-        rangefinder = new AnalogInput(portNumber);
-        rangefinder.setOversampleBits(2); // Completely arbitrary
-        rangefinder.setAverageBits(2); // Ditto
+    public UltrasonicSensor(){
+        rangefinder = new AnalogInput(Constants.UltrasonicSensorConstants.ultraSonicSensorPort);
+        rangefinder.setOversampleBits(Constants.UltrasonicSensorConstants.overSampleBits); // Completely arbitrary
+        rangefinder.setAverageBits(Constants.UltrasonicSensorConstants.averageBits); // Ditto
     }
     
     /** Returns the distance measured in centimeter.  */
     public double getInches(){
         double volts = rangefinder.getAverageVoltage();
-        return (double) (volts * SCALING_FACTOR);
+        return (double) (volts * Constants.UltrasonicSensorConstants.scalingFactor);
     }
     
     /** Returns the distance measured in feet.  */

@@ -17,12 +17,23 @@ package frc.robot;
  */
 public final class Constants {
   public static final class DriveConstants{
-      public static final int frontLeftMotorPwmPort = 4;
-      public static final int frontRightMotorPwmPort = 5;
-      public static final int rearLeftMotorPwmPort = 3;
-      public static final int rearRightMotorPwmPort = 2;
+      public static final int frontLeftCanTalonSrxMotorPort = 4;
+      public static final int frontRightCanTalonSrxMotorPort = 5;
+      public static final int rearLeftCanTalonSrxMotorPort = 3;
+      public static final int rearRightCanTalonSrxMotorPort = 2;
 
       public static final double throttlevalue = 0.5;//[0 - 1]
+  }
+
+  public static final class UltrasonicSensorConstants{
+      public static final int ultraSonicSensorPort = 0;
+      public static final int overSampleBits = 2;
+      public static final int averageBits = 2;
+      public static final int scalingFactor = 512/5*24/23;
+  }
+
+  public static final class VisionConstants{
+
   }
   //ports
 
