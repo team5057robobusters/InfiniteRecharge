@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
-
+import frc.robot.Constants;
 /**
  *
  * @author Zach Sussman
@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.Relay;
 public class IntakeDrop {
     private DoubleSolenoid intakeLift;
 
-    public IntakeDrop(int portNumber)
+    public IntakeDrop()
     {
-        intakeLift = new DoubleSolenoid(portNumber,1);
+        intakeLift = new DoubleSolenoid(IntakeDropConstants.intakeLiftPortForwardChannel,IntakeDropConstants.intakeLiftPortReverseChannel);
     }
 }
