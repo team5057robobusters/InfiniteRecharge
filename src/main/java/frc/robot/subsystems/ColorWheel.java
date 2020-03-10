@@ -17,7 +17,7 @@ public class ColorWheel {
     private Timer time;
     private Victor colorMotor;
 
-    int colorMotorPort = 0;
+    int colorMotorPort = 8;
 
     public ColorWheel()
     {

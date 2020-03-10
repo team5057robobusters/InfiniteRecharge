@@ -46,10 +46,10 @@ public class Robot extends TimedRobot {
   private HookMechanism m_hook;
   private Victor shootingMotor;
   //ports
-  final int leftFrontCanPort = 4;
-  final int rightFrontCanPort = 5;
-  final int leftRearCanPort = 3;
-  final int rightRearCanPort = 2;
+  final int leftFrontCanPort = 1;
+  final int rightFrontCanPort = 2;
+  final int leftRearCanPort = 0;
+  final int rightRearCanPort = 3;
 
   private boolean isOn = false;
 
@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    shootingMotor = new Victor(1);
+    shootingMotor = new Victor(7);
     LeftFrontMotor = new WPI_TalonSRX(leftFrontCanPort);
     RightFrontMotor = new WPI_TalonSRX(rightFrontCanPort);
     LeftRearMotor = new WPI_TalonSRX(leftRearCanPort);
@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
     m_ultrasonic = new UltrasonicSensor(0);
-    m_intake = new Intake(2, 3, 5, 6);
+    m_intake = new Intake(1, 2, 1, 2);
     m_pixy2 = new Vision();
     m_hook = new HookMechanism();
     RightFrontMotor.setInverted(true);
