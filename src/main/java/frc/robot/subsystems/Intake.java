@@ -44,8 +44,8 @@ public class Intake extends SubsystemBase {
   */
   public void turnOn(boolean invert) {
     piston.set(Value.kForward);
-    intakeMotor1.set(invert?-1:1);
-    intakeMotor2.set(invert?-1:1);
+    intakeMotor1.set(-1);
+    intakeMotor2.set(1);
   }
   public void turnOff() {
     piston.set(Value.kReverse);

@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
     m_ultrasonic = new UltrasonicSensor(0);
-    m_intake = new Intake(1, 2, 1, 2);
+    m_intake = new Intake(2, 3, 0, 1);
     m_pixy2 = new Vision();
     m_hook = new HookMechanism();
     RightFrontMotor.setInverted(true);
@@ -203,7 +203,7 @@ public class Robot extends TimedRobot {
       }
       
     }
-    if (xboxControl.getYButtonPressed()) {
+    if (xboxControl.getBButtonPressed()) {
       if (isOn) {
         m_intake.turnOff();
         isOn = false;
