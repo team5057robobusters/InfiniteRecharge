@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class Intake extends SubsystemBase {
   /**
@@ -16,7 +17,9 @@ public class Intake extends SubsystemBase {
   public final int forwardChannel, reverseChannel;
   public Victor intakeMotor1;
   public Victor intakeMotor2;
+  public Victor intakeMotor3;
   public boolean isOn;
+  public boolean isDown;
   public Intake(int fc, int rc, int v1, int v2) {
     isOn = false;
     forwardChannel = fc;
@@ -25,6 +28,7 @@ public class Intake extends SubsystemBase {
     piston = new DoubleSolenoid(forwardChannel, reverseChannel);
     intakeMotor1 = new Victor(v1);
     intakeMotor2 = new Victor(v2);
+    intakeMotor3 = new Victor(6);
   }
 
   /*@Override
@@ -42,15 +46,33 @@ public class Intake extends SubsystemBase {
     }
   }
   */
-  public void turnOn(boolean invert) {
-    piston.set(Value.kForward);
-    intakeMotor1.set(-1);
-    intakeMotor2.set(1);
-  }
-  public void turnOff() {
-    piston.set(Value.kReverse);
-    intakeMotor1.set(0);
-    intakeMotor2.set(0);
+  
+  public void checkButton(XboxController xboxControl){
+    if (xboxControl.getBButtonPressed()) {
+      if (isDown) {
+        piston.set(Value.kReverse);
+        isDown = false;
+      }
+      else {
+        piston.set(Value.kForward);
+        isDown = true;
+      }
+    }
+    if (xboxControl.getTriggerAxis(Hand.kLeft)>.2) {
+      if (isOn) {
+        isOn = false;
+        intakeMotor1.set(0);
+        intakeMotor2.set(0);
+        intakeMotor3.set(0);
+      }
+      else {
+        intakeMotor1.set(-xboxControl.getTriggerAxis(Hand.kLeft));
+        intakeMotor2.set(xboxControl.getTriggerAxis(Hand.kLeft));
+        intakeMotor3.set(-xboxControl.getTriggerAxis(Hand.kLeft));
+        isOn = true;
+      
+      }
+    }
   }
 
 }

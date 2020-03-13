@@ -46,10 +46,10 @@ public class Robot extends TimedRobot {
   private HookMechanism m_hook;
   private Victor shootingMotor;
   //ports
-  final int leftFrontCanPort = 1;
-  final int rightFrontCanPort = 2;
-  final int leftRearCanPort = 0;
-  final int rightRearCanPort = 3;
+  final int leftFrontCanPort = 2;
+  final int rightFrontCanPort = 3;
+  final int leftRearCanPort = 1;
+  final int rightRearCanPort = 4;
 
   private boolean isOn = false;
 
@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
     //LeftFrontDrive = new SpeedControllerGroup(speedController, speedControllers)
     
     m_ultrasonic = new UltrasonicSensor(0);
-    m_intake = new Intake(2, 3, 0, 1);
+    m_intake = new Intake(0, 1, 0, 1);
     m_pixy2 = new Vision();
     m_hook = new HookMechanism();
     RightFrontMotor.setInverted(true);
@@ -203,18 +203,12 @@ public class Robot extends TimedRobot {
       }
       
     }
-    if (xboxControl.getBButtonPressed()) {
-      if (isOn) {
-        m_intake.turnOff();
-        isOn = false;
-      }
-      else {
-        m_intake.turnOn(false);
-        isOn = true;
-      }
+    m_intake.checkButton(xboxControl);
+    if(xboxControl.getTriggerAxis(Hand.kRight)>.1){
+      shootingMotor.set(1);
+    } else{
+      shootingMotor.set(0);
     }
-    shootingMotor.set(xboxControl.getTriggerAxis(Hand.kRight));
-
     m_hook.checkButton(xboxControl);
   }
 

@@ -13,7 +13,7 @@ public class HookMechanism {
     private DoubleSolenoid piston;
     public boolean hook;
     public HookMechanism() {
-      piston = new DoubleSolenoid(0, 1);
+      piston = new DoubleSolenoid(2, 3);
       hook = true;
     }
   
